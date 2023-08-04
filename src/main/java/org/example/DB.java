@@ -5,7 +5,7 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 
-//Full class written by Nehal - After referring to code by Anushka present in main
+//Full class written by Nehal - After referring a bit to code by Anushka present in main
 public class DB {
 
     static DB dbObj;
