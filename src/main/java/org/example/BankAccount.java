@@ -1,8 +1,9 @@
 package org.example;
 
-public class BankAccount {
+public class BankAccount extends BankAccountHandler{
     private String name;
     private double balance;
+
 
     public String getName() {
         return name;
@@ -29,10 +30,13 @@ public class BankAccount {
         this.balance+=_balance;
     }
 
-    public void withdraw(double _balance){
-        if(balance<_balance)
+    public boolean withdraw(double _balance){
+        if(balance<_balance) {
             System.out.println("Insufficient balance");
+            return false;
+        }
         else
         this.balance-=_balance;
+        return true;
     }
 }

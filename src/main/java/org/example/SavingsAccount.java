@@ -7,10 +7,14 @@ public class SavingsAccount extends BankAccount{
     }
 
 
-    public void withdraw(double _balance){
+    public boolean withdraw(double _balance){
         double balance = getBalance();
 
-        if(balance-_balance<100)
+        if(balance-_balance<100){
             System.out.println("Insufficient bank balance");
+            return false;
+        }
+        balance=-_balance;
+        return true;
     }
 }
