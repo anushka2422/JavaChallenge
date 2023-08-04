@@ -30,6 +30,9 @@ public class BankAccount {
     }
 
     public void withdraw(double _balance){
+        if(balance<_balance)
+            System.out.println("Insufficient balance");
+        else
         this.balance-=_balance;
     }
 }

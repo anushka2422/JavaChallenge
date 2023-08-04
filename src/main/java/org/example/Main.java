@@ -29,7 +29,7 @@ public class Main {
         while(true){
             int condition = 0;
             System.out.println("Menu");
-            System.out.println("Enter a: Add Account\nEnter I: Display Accounts\nEnter q: Quit\nEnter s: Save to database\nEnter d: Display data from database");
+            System.out.println("Enter a: Add Account\nEnter I: Display Accounts\nEnter q: Quit\nEnter s: Save to database\nEnter d: Deposit funds\nEnter w: Withdraw funds");
             Scanner sc = new Scanner(System.in);
             char input = sc.next().charAt(1);
             switch (input){
@@ -52,11 +52,13 @@ public class Main {
                     }
                     break;
                 case 'd':
-                    accounts = database.getCollection("accountsData");
+                    /*accounts = database.getCollection("accountsData");
                     List<Document> accountList = accounts.find().into(new ArrayList<>());
                     for(Document doc:accountList){
                         System.out.println("Account name: "+doc.get("name") + " Balance: "+doc.get("balance"));
                     }
+                    */
+                     
                     break;
                 case 's':
                     insertDocument(bankAccountList);
