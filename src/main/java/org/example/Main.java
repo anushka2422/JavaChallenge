@@ -8,9 +8,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.bson.Document;
 
 import javax.print.Doc;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class Main {
@@ -32,23 +30,43 @@ public class Main {
             System.out.println("Enter a: Add Account\nEnter I: Display Accounts\nEnter q: Quit\nEnter s: Save to database\nEnter d: Deposit funds\nEnter w: Withdraw funds");
             Scanner sc = new Scanner(System.in);
             char input = sc.next().charAt(1);
-            switch (input){
+            switch (input) {
                 case 'a':
                     System.out.println("Enter Account name");
                     sc = new Scanner(System.in);
                     String name = sc.nextLine();
+                    while(name.matches(".*\\d+.*")){
+                        System.out.println("Invalid input. Account name cannot contain numeric characters enter again.");
+                        name = sc.nextLine();
+                    }
+
                     System.out.println("Enter Balance");
                     sc = new Scanner(System.in);
-                    double balance = sc.nextDouble();
-                    BankAccount bankAccount = new SavingsAccount(name,balance);
+                    double balance = 0;
+                    boolean valid = false;
+                    while(!valid){
+                        try{
+                            balance = sc.nextDouble();
+                            if(balance<0){
+                                System.out.println("Invalid input");
+                            }
+                            valid=true;
+                        }
+                        catch (InputMismatchException e){
+                            System.out.println(e);
+                            sc.next();
+                        }
+                    }
+                    BankAccount bankAccount = new SavingsAccount(name, balance);
+
                     System.out.println("Saving Account created");
                     bankAccountList.add(bankAccount);
-                    System.out.println("Account name: "+bankAccount.getName()+" Balance: "+bankAccount.getBalance());
+                    System.out.println("Account name: " + bankAccount.getName() + " Balance: " + bankAccount.getBalance());
                     break;
                 case 'I':
                     System.out.println("Bank Accounts List:");
-                    for(BankAccount bankAccount1:bankAccountList){
-                        System.out.println("Account holder's name: "+bankAccount1.getName()+" Balance: "+bankAccount1.getBalance());
+                    for (BankAccount bankAccount1 : bankAccountList) {
+                        System.out.println("Account holder's name: " + bankAccount1.getName() + " Balance: " + bankAccount1.getBalance());
                     }
                     break;
                 case 'd':
@@ -58,7 +76,7 @@ public class Main {
                         System.out.println("Account name: "+doc.get("name") + " Balance: "+doc.get("balance"));
                     }
                     */
-                     
+
                     break;
                 case 's':
                     insertDocument(bankAccountList);
